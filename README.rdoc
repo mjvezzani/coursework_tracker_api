@@ -1,28 +1,28 @@
-== README
+== Coursework Tracker API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a simple JSON api that receives commands and sends messages
+regarding individual courses and the assignments associated with a given
+course.
 
-Things you may want to cover:
+To set this api up on your local environment requires the following steps:
 
-* Ruby version
+* download source code to your local machine
+* update your /etc/hosts file to include the line `127.0.0.1 localhost api.coursework-tracker.com`
+* navigate to the root folder of the api project
+* start up a server for the api with `rails s`
 
-* System dependencies
+Issuing requests to the hosting server can be done like so:
 
-* Configuration
+* curl http://api.coursework-tracker.com/courses => Returns a list of courses
+* curl -iX POST -d 'course[name]=Biology+101&course[credit_hours]=4.0' http://api.coursework-tracker.com/courses => creates a course record
+* curl -iX PATCH -d 'assignment[name]=100+word+essay' http://api.coursework-tracker.com/courses/:id/assignments/:id => updates an existing assignment record
 
-* Database creation
+There are courses and assignments. Courses have the following required fields when being created:
+* name:String
+* credit_hours:Float
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Assignment required fields are:
+* name:String
+* points_possible:Integer
+* points_received:Integer
+* complete:Boolean
